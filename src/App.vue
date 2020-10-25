@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+  <h2>Weather App</h2>
     <main :class="{ 'warm' : isWarm }">
       <div class="search-box">
         <input
@@ -107,7 +108,10 @@ export default {
 
 #app {
   font-family: "Montserrat", sans-serif;
-
+h1{
+text-align: center;
+margin-top: 1rem;
+}
   main {
     background-image: url("assets/cold-bg1.jpeg");
     background-size: cover;
