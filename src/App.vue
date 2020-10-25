@@ -108,10 +108,7 @@ export default {
 
 #app {
   font-family: "Montserrat", sans-serif;
-h1{
-text-align: center;
-margin-top: 1rem;
-}
+
   main {
     background-image: url("assets/cold-bg1.jpeg");
     background-size: cover;
@@ -124,6 +121,10 @@ margin-top: 1rem;
       rgba(0, 0, 0, 0.25),
       rgba(0, 0, 0, 0.75)
     );
+     h1{
+text-align: center;
+margin: 1rem 0;
+}
     .search-box {
       width: 100%;
       margin-bottom: 30px;
@@ -148,6 +149,7 @@ margin-top: 1rem;
         border-radius: 16px 0px 16px 0px;
         color: #fff;
       }
+     
     }
     .weather-wrap {
       .location-box {
