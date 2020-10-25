@@ -123,7 +123,7 @@ export default {
     );
      h1{
 text-align: center;
-margin: 1rem 0;
+margin: 1rem auto;
 }
     .search-box {
       width: 100%;
