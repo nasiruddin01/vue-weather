@@ -45,8 +45,7 @@ export default {
   },
   watch: {
     isWarm(value) {
-      console.log(value);
-    },
+          },
   },
   methods: {
     fetchWeather(e) {
