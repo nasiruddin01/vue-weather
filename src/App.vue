@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-  <h2>Weather App</h2>
-    <main :class="{ 'warm' : isWarm }">
+      <main :class="{ 'warm' : isWarm }">
+      <h2>Weather App</h2>
       <div class="search-box">
         <input
           v-model="query"
