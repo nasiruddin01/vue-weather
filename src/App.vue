@@ -57,10 +57,11 @@ export default {
             return res.json();
           })
           .then(this.setResults);
-      }
+               }
     },
     setResults(results) {
       this.weather = results;
+      console.log(results);
     },
     dateBuilder() {
       let d = new Date();
