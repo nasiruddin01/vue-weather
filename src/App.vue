@@ -84,7 +84,7 @@ export default {
             return res.json();
           })
           .then(this.setResults);
-      }
+               }
     },
     setResults(results) {
       this.weather = results;
@@ -149,10 +149,10 @@ export default {
       rgba(0, 0, 0, 0.25),
       rgba(0, 0, 0, 0.75)
     );
-    h1 {
-      text-align: center;
-      margin: 2rem 0;
-    }
+     h1{
+text-align: center;
+margin: 1rem auto;
+}
     .search-box {
       max-width: 600px;
       margin-bottom: 30px;
@@ -178,6 +178,7 @@ export default {
         background-color: rgba(0, 0, 0, 0.75);
         color: #fff;
       }
+     
     }
     .weather-wrap {
       .location-box {

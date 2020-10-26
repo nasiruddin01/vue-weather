@@ -1,5 +1,7 @@
 # vue-weather
+This site is build in vue.js
 
+site live link: https://weather-vuejs.netlify.app/
 ## Project setup
 ```
 npm install
