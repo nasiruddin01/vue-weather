@@ -1,23 +1,35 @@
 <template>
   <div id="app">
-    <main :class="{ 'warm' : isWarm }">
+    <main
+      :class="{
+        warm: isWarm,
+        clouds: isCloud,
+        clear: isClear,
+        haze: isHaze,
+        rain: isRain,
+        cold: isCold,
+      }"
+    >
+      <h1>Weather App</h1>
       <div class="search-box">
         <input
           v-model="query"
           @keypress="fetchWeather"
           type="text"
           class="search-bar"
-          placeholder="Search...."
+          placeholder="Search your city..."
         />
       </div>
-      <div class="weather-wrap" v-if="typeof weather.main !='undefined'">
+      <div class="weather-wrap" v-if="weather">
         <div class="location-box">
-          <div class="location">{{ weather.name }},{{weather.sys.country}}</div>
+          <div class="location">
+            {{ weather.name }},{{ weather.sys.country }}
+          </div>
           <div class="date">{{ dateBuilder() }}</div>
         </div>
         <div class="weather-box">
-          <div class="temp">{{Math.round(weather.main.temp)}}°c</div>
-          <div class="weather">{{weather.weather[0].main}}</div>
+          <div class="temp">{{ Math.round(weather.main.temp) }}°c</div>
+          <div class="weather">{{ weather.weather[0].main }}</div>
         </div>
       </div>
     </main>
@@ -32,20 +44,35 @@ export default {
       api_key: "f064a082d05edbbddf41d7254c8176ed",
       url_base: "https://api.openweathermap.org/data/2.5/",
       query: "",
-      weather: {},
+      weather: null,
     };
   },
   computed: {
     isWarm() {
-      return this.weather.main != undefined && this.weather.main.temp > 16
-        ? true
-        : false;
+      return this.weather ? this.weather.weather[0].main === "Warm" : null;
+    },
+    isCloud() {
+      return this.weather ? this.weather.weather[0].main === "Clouds" : null;
+    },
+    isHaze() {
+      return this.weather ? this.weather.weather[0].main === "Haze" : null;
+    },
+    isRain() {
+      return this.weather ? this.weather.weather[0].main === "Rain" : null;
+    },
+    isClear() {
+      return this.weather ? this.weather.weather[0].main === "Clear" : null;
+    },
+    isCold() {
+      return this.weather ? this.weather.weather[0].main === "cold" : null;
     },
   },
-  watch: {
-    isWarm(value) {
-      console.log(value);
-    },
+  mounted() {
+    fetch(`${this.url_base}weather?q=Dhaka&units=metric&APPID=${this.api_key}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then(this.setResults);
   },
   methods: {
     fetchWeather(e) {
@@ -61,7 +88,9 @@ export default {
     },
     setResults(results) {
       this.weather = results;
+      console.log(results);
     },
+    
     dateBuilder() {
       let d = new Date();
       let months = [
@@ -109,7 +138,7 @@ export default {
   font-family: "Montserrat", sans-serif;
 
   main {
-    background-image: url("assets/cold-bg1.jpeg");
+    background-image: url("assets/cold.jpeg");
     background-size: cover;
     background-position: bottom;
     transition: 0.4s;
@@ -120,10 +149,16 @@ export default {
       rgba(0, 0, 0, 0.25),
       rgba(0, 0, 0, 0.75)
     );
+    h1 {
+      text-align: center;
+      margin: 2rem 0;
+    }
     .search-box {
-      width: 100%;
+      max-width: 600px;
       margin-bottom: 30px;
+      margin: auto;
       .search-bar {
+        width: 90%;
         display: block;
         width: 100%;
         padding: 15px;
@@ -133,15 +168,14 @@ export default {
         border: none;
         outline: none;
         background: none;
+        border-radius: 3px;
         box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
         background-color: rgba(255, 255, 255, 0.5);
-        border-radius: 0px 16px 0px 16px;
         transition: 0.4s;
       }
       :focus {
         box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
         background-color: rgba(0, 0, 0, 0.75);
-        border-radius: 16px 0px 16px 0px;
         color: #fff;
       }
     }
@@ -153,6 +187,7 @@ export default {
           font-weight: 500;
           text-align: center;
           text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
+          margin-top: 2rem;
         }
         .date {
           color: #fff;
@@ -160,6 +195,7 @@ export default {
           font-weight: 300;
           font-style: italic;
           text-align: center;
+          margin-top: 1rem;
         }
       }
       .weather-box {
@@ -186,8 +222,23 @@ export default {
       }
     }
   }
+  .rain {
+    background-image: url("assets/rain.jpg");
+  }
   .warm {
     background-image: url("assets/warm-bg.jpg");
+  }
+   .cold{
+    background-image: url("assets/cold.jpeg");
+  }
+  main{
+    background-image: url("assets/cloudy.jpg");
+  }
+   .haze{
+    background-image: url("assets/haze.jpg");
+  }
+  .clear{
+    background-image: url("assets/clear.jpg");
   }
 }
 </style>
